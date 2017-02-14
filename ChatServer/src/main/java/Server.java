@@ -72,7 +72,7 @@ private void handleConnection(Socket connection) throws IOException {
             case "LOGIN":
                 //login
                if( checkLogin(sender)){//succesful login
-               users.add(new Connection(sender,connection.getChannel()));
+               users.add(new Connection(sender,connection));
               //send ok to sender
               
               //send update to online users 
@@ -93,10 +93,7 @@ private void handleConnection(Socket connection) throws IOException {
         }
         
         
-        // Print the same line we read to the client
-        PrintStream writer = new PrintStream(output);
-        writer.println(line);
-      System.out.println("SERVER: "+line);
+    
     }
  public boolean checkLogin(String username){
     
@@ -107,7 +104,26 @@ private void handleConnection(Socket connection) throws IOException {
         }
     return true;
     }
-
+ private void replyClient(String reply, Socket connection) throws IOException{
+     OutputStream output = connection.getOutputStream();
+     // Print the same line we read to the client
+        PrintStream writer = new PrintStream(output);
+        writer.println(reply);
+      System.out.println("SERVER: "+reply);
+ }
+ private void replyAllClient(String reply) throws IOException{
+    
+     
+     OutputStream output;
+     for (Connection connection : users) {
+         output = connection.getSocket().getOutputStream();
+     // Print the same line we read to the client
+        PrintStream writer = new PrintStream(output);
+        writer.println(reply);
+      
+     }
+     
+ }
 
     public static void main(String[] args) throws IOException {
      Server server = new Server("localhost",8081);

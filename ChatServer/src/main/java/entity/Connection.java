@@ -5,6 +5,7 @@
  */
 package entity;
 
+import java.net.Socket;
 import java.nio.channels.SocketChannel;
 
 /**
@@ -13,19 +14,19 @@ import java.nio.channels.SocketChannel;
  */
 public class Connection {
    String username;
-SocketChannel socketChannel;
+Socket socket;
 
-    public Connection(String username, SocketChannel socketChannel) {
+    public Connection(String username, Socket socketChannel) {
         this.username = username;
-        this.socketChannel = socketChannel;
+        this.socket = socketChannel;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public SocketChannel getSocketChannel() {
-        return socketChannel;
+    public Socket getSocket() {
+        return socket;
     }
 
 
