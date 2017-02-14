@@ -1,5 +1,8 @@
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
@@ -53,6 +56,8 @@ public class Client {
         clientSocket.connect(new InetSocketAddress(host, port));
         connected = true;
         System.out.println("Connecting to chatserver");
+        //creating thread to listen from server
+        new Thread(new ReadCon(clientSocket.getInputStream())).start();
         sendMessage("LOGIN#" + username);
     }
     
