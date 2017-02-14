@@ -55,6 +55,7 @@ public class Client {
         System.out.println("Connecting to chatserver");
         sendMessage("LOGIN#" + username);
     }
+    
 
     public void sendMessage(String message) throws IOException {
         // Creates new Thread and writes to the server
