@@ -33,10 +33,24 @@ public class ReadCon implements Runnable {
                 while ((fromServer = reader.readLine()) == null) {
                     // Wait until the server says something interesting
                 }
-                System.out.println(fromServer);
+                protocolDecoder(fromServer);
             }
         } catch (IOException ex) {
         }
     }
+    public void protocolDecoder(String s){
+        switch(s.split("#")[0]){
+            case "OK":
+                
+                String rest = "Du er connected til serveren\nFølgende brugere er online:\n";
+             
+               
+                for (String username : s.split("#")) {
+                    rest+="\n"+username;
+                }
+                System.out.println(rest);
+        }
+    }
+    
 
 }
