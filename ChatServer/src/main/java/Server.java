@@ -129,8 +129,8 @@ private void handleConnection(Socket connection) throws IOException {
         writer.println(reply);
       System.out.println("SERVER: "+reply);
  }
- private void replyAllClient(String re, String username) throws IOException{
-    String reply = re+username;
+ private void replyAllClient(String type, String username) throws IOException{
+    String reply = type+"#"+username;
     OutputStream output;
      
      for (Connection connection : users) {
