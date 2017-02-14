@@ -1,26 +1,51 @@
 
-# Created by https://www.gitignore.io/api/netbeans,maven
+#ChatServer
 
 ### Maven ###
-target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
-.mvn/timing.properties
+ChatServer/target/
+ChatServer/pom.xml.tag
+ChatServer/pom.xml.releaseBackup
+ChatServer/pom.xml.versionsBackup
+ChatServer/pom.xml.next
+ChatServer/release.properties
+ChatServer/dependency-reduced-pom.xml
+ChatServer/buildNumber.properties
+ChatServer/.mvn/timing.properties
 
 # Exclude maven wrapper
-!/.mvn/wrapper/maven-wrapper.jar
+!ChatServer/.mvn/wrapper/maven-wrapper.jar
 
 ### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
+ChatServer/nbproject/private/
+ChatServer/build/
+ChatServer/nbbuild/
+ChatServer/dist/
+ChatServer/nbdist/
+ChatServer/.nb-gradle/
+
+
+#ChatClient
+
+### Maven ###
+ChatClient/target/
+ChatClient/pom.xml.tag
+ChatClient/pom.xml.releaseBackup
+ChatClient/pom.xml.versionsBackup
+ChatClient/pom.xml.next
+ChatClient/release.properties
+ChatClient/dependency-reduced-pom.xml
+ChatClient/buildNumber.properties
+ChatClient/.mvn/timing.properties
+
+# Exclude maven wrapper
+!ChatClient/.mvn/wrapper/maven-wrapper.jar
+
+### NetBeans ###
+ChatClient/nbproject/private/
+ChatClient/build/
+ChatClient/nbbuild/
+ChatClient/dist/
+ChatClient/nbdist/
+ChatClient/.nb-gradle/
 
 # End of https://www.gitignore.io/api/netbeans,maven
