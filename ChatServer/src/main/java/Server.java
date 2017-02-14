@@ -73,19 +73,22 @@ private void handleConnection(Socket connection) throws IOException {
                 //login
                if( checkLogin(sender)){//succesful login
                users.add(new Connection(sender,connection));
-              //send ok to sender
+           
+              replyClient("OK",connection);//Successful login followed by list of active user names
               
-              //send update to online users 
-               }else{//faied login
-               
+              //Update all clients when a single new user logs in
+              replyAllClient("UPDATE",sender);
+               }else{
+                replyClient("FAIL",connection);//Failed login if user name is already taken or connection error
                }
                 
                 break;
             
             case "MSG":
-                 messege = inputHandler.findMessege(line);
-                 
+                 messege = inputHandler.findMessege(line);    
                  messages.add(new Message(sender,messege));
+                  replyAllClient("MSG","f");//
+                  
                  //send to users
             break;
        
@@ -104,17 +107,32 @@ private void handleConnection(Socket connection) throws IOException {
         }
     return true;
     }
- private void replyClient(String reply, Socket connection) throws IOException{
+ private void replyClient(String re, Socket connection) throws IOException{
      OutputStream output = connection.getOutputStream();
      // Print the same line we read to the client
+     String reply = re;
+     
+     switch(reply){
+     
+         case "OK"://send
+             for (Connection con : users) {
+                 reply+="#"+con.getUsername();
+             }
+             break;
+            case "FAIL":
+           
+             break;
+                     
+     
+     }
         PrintStream writer = new PrintStream(output);
         writer.println(reply);
       System.out.println("SERVER: "+reply);
  }
- private void replyAllClient(String reply) throws IOException{
-    
+ private void replyAllClient(String re, String username) throws IOException{
+    String reply = re+username;
+    OutputStream output;
      
-     OutputStream output;
      for (Connection connection : users) {
          output = connection.getSocket().getOutputStream();
      // Print the same line we read to the client
@@ -123,6 +141,12 @@ private void handleConnection(Socket connection) throws IOException {
       
      }
      
+ }
+ private void messageToAll(String msg, String sender){
+ 
+ }
+  private void messageToClient(String msg,String sender, String reciever){
+ 
  }
 
     public static void main(String[] args) throws IOException {
