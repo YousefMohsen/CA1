@@ -46,7 +46,7 @@ public class Server {
 
         // Wait for a connection
       Socket connection;
-      while ((connection = socket.accept()) != null) {
+      while (true) {//(connection = socket.accept()) != null
          
  
           }
@@ -59,7 +59,8 @@ private void handleConnection(Socket connection) throws IOException {
         String messege;
         String reciever;
         String sender;
-       
+        Socket recieverSocket;
+       System.out.println("handleConnection");
         // Read whatever comes in
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
         String line = reader.readLine();
@@ -67,11 +68,12 @@ private void handleConnection(Socket connection) throws IOException {
         type = inputHandler.findType(line);
         reciever = inputHandler.findReciever(line);
        
-        
+       System.out.println("l 71 type: "+type); 
       
        switch(type){
         
             case "LOGIN":
+                System.out.println("switch login");
                 //login
                if( checkLogin(reciever)){//succesful login // in this case "reciever" is the sender of the message
                users.add(new Connection(reciever,connection));
@@ -96,7 +98,9 @@ private void handleConnection(Socket connection) throws IOException {
                   messageToAll(messege,sender);
               
               }else{
-             //     messageToClient(messege,sender,
+                recieverSocket = inputHandler.findRecieverSocket(users, reciever);
+               
+                messageToClient(messege,sender,recieverSocket);
               }
                 
                   
@@ -126,9 +130,12 @@ private void handleConnection(Socket connection) throws IOException {
      switch(reply){
      
          case "OK"://send
+             if(users.size()==1){
+             reply+="#";
+             } else{
              for (Connection con : users) {
                  reply+="#"+con.getUsername();
-             }
+             }}
              break;
             case "FAIL":
            

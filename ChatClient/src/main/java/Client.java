@@ -22,7 +22,7 @@ import java.util.function.Consumer;
 public class Client {
 
     private final String host = "localhost";
-    private final int port = 8080;
+    private final int port = 8081;
     private Socket clientSocket;
     public Boolean connected = false;
 
