@@ -75,7 +75,7 @@ private void handleConnection(Socket connection) throws IOException {
        switch(type){
         
             case "LOGIN":
-                System.out.println("switch login");
+              
                 //login
                if( checkLogin(reciever)){//succesful login // in this case "reciever" is the sender of the message
                users.add(new Connection(reciever,connection));
@@ -91,12 +91,16 @@ private void handleConnection(Socket connection) throws IOException {
                 break;
             
             case "MSG":
+                  System.out.println("msg login");
                  sender = inputHandler.findSender(users, connection);
                  messege = inputHandler.findMessege(line); 
-                 
+                   System.out.println("sender "+sender);
+                   System.out.println("messege "+messege);
+                   
                  messages.add(new Message(sender,messege));
                   
               if(reciever.equals("ALL")){
+                  System.out.println("l 103 all");
                   messageToAll(messege,sender);
               
               }else{
