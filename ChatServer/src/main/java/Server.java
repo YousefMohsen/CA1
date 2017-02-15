@@ -34,6 +34,8 @@ public class Server {
     public Server(String host, int port) {
         this.host = host;
         this.port = port;
+        users = new ArrayList();
+        messages = new  ArrayList();
     }
 
  public void startServer() throws IOException {
@@ -46,9 +48,9 @@ public class Server {
 
         // Wait for a connection
       Socket connection;
-      while (true) {//(connection = socket.accept()) != null
+      while ((connection = socket.accept()) != null) {//
          
- 
+        handleConnection(connection);
           }
     }
 private void handleConnection(Socket connection) throws IOException {

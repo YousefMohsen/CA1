@@ -60,7 +60,7 @@ public Socket findRecieverSocket(ArrayList<Connection> userlist,String recieverN
         System.out.println("type "+ ha.findType("MSG#Messi#Hej G"));
         System.out.println( "messege "+ha.findMessege("MSG#Messi#Hej G"));
         System.out.println( "messege "+ha.findMessege("MSG#Messi#Hej G"));
-
+ System.out.println("type "+ ha.findType("LOGIN#Messi"));
         
         
     }
