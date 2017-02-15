@@ -26,6 +26,7 @@ public class MsgCon implements Runnable{
     public void run() {
         PrintWriter writer = new PrintWriter(output);
                 writer.println(message);
+                System.out.println(message);
                 writer.flush();
     }
 }

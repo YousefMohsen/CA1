@@ -25,6 +25,11 @@ public class Client {
     private final int port = 8081;
     private Socket clientSocket;
     public Boolean connected = false;
+    private String reciever;
+
+    public Client() {
+        reciever = "ALL";
+    }
 
     public static void main(String[] args) throws IOException {
         Client cl = new Client();
@@ -38,10 +43,13 @@ public class Client {
                     System.out.println("Skriv dit username:");
                     cl.login((String) sc.next());
                     break;
-
+                case "chat":
+                    System.out.println("Type name of the reciever or ALL for everyone");
+                    cl.reciever = (String) sc.next();
+                    break;
                 default:
                     if (cl.connected) {
-                        cl.sendMessage("MSG#" + input);
+                        cl.sendMessage("MSG#" + cl.reciever + "#" + input);
                     } else {
                         System.out.println("Please login to the server by typing: login");
                     }
@@ -60,11 +68,10 @@ public class Client {
         new Thread(new ReadCon(clientSocket.getInputStream())).start();
         sendMessage("LOGIN#" + username);
     }
-    
 
     public void sendMessage(String message) throws IOException {
         // Creates new Thread and writes to the server
-        new Thread(new MsgCon(clientSocket.getOutputStream(),message)).start();
+        new Thread(new MsgCon(clientSocket.getOutputStream(), message)).start();
     }
-    
+
 }

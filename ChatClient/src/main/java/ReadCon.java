@@ -42,11 +42,14 @@ public class ReadCon implements Runnable {
         switch(s.split("#")[0]){
             case "OK":
                 
-                String rest = "Du er connected til serveren\nFølgende brugere er online:\n";
+                String rest = "You are now connected to the server\nUsers Online:";
              
                
                 for (String username : s.split("#")) {
-                    rest+="\n"+username;
+                    
+                }
+                for (int i = 1; i < s.split("#").length; i++) {
+                    rest+="\n"+s.split("#")[i];
                 }
                 System.out.println(rest);
             break;
@@ -58,13 +61,11 @@ public class ReadCon implements Runnable {
                 System.out.println(sender+" (pm): "+message);
             break;
             case "FAIL":
-                System.out.println("Online: ");
+                System.out.println("Connection failed or username already taken");
             break;
             case "UPDATE":
-                System.out.println("Online: ");
             break;
             case "DELETE":
-                System.out.println("Online: ");
             break;
         }
     }
