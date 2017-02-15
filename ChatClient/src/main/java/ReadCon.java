@@ -49,6 +49,23 @@ public class ReadCon implements Runnable {
                     rest+="\n"+username;
                 }
                 System.out.println(rest);
+            break;
+            case "MSG":
+                String sender;
+                String message;
+                sender = s.split("#")[1];
+                message = s.split("#")[2];
+                System.out.println(sender+" (pm): "+message);
+            break;
+            case "FAIL":
+                System.out.println("Online: ");
+            break;
+            case "UPDATE":
+                System.out.println("Online: ");
+            break;
+            case "DELETE":
+                System.out.println("Online: ");
+            break;
         }
     }
     
