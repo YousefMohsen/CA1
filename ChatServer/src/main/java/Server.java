@@ -57,13 +57,15 @@ private void handleConnection(Socket connection) throws IOException {
         Handler inputHandler = new Handler();
         String type;
         String messege;
+        String reciever;
         String sender;
+       
         // Read whatever comes in
         BufferedReader reader = new BufferedReader(new InputStreamReader(input));
         String line = reader.readLine();
      
         type = inputHandler.findType(line);
-        sender = inputHandler.findSender(line);
+        reciever = inputHandler.findReciever(line);
        
         
       
@@ -71,13 +73,13 @@ private void handleConnection(Socket connection) throws IOException {
         
             case "LOGIN":
                 //login
-               if( checkLogin(sender)){//succesful login
-               users.add(new Connection(sender,connection));
+               if( checkLogin(reciever)){//succesful login // in this case "reciever" is the sender of the message
+               users.add(new Connection(reciever,connection));
            
               replyClient("OK",connection);//Successful login followed by list of active user names
               
               //Update all clients when a single new user logs in
-              replyAllClient("UPDATE",sender);
+              updateAllClients("UPDATE",reciever);
                }else{
                 replyClient("FAIL",connection);//Failed login if user name is already taken or connection error
                }
@@ -85,9 +87,18 @@ private void handleConnection(Socket connection) throws IOException {
                 break;
             
             case "MSG":
-                 messege = inputHandler.findMessege(line);    
+                 sender = inputHandler.findSender(users, connection);
+                 messege = inputHandler.findMessege(line); 
+                 
                  messages.add(new Message(sender,messege));
-                  replyAllClient("MSG","f");//
+                  
+              if(reciever.equals("ALL")){
+                  messageToAll(messege,sender);
+              
+              }else{
+             //     messageToClient(messege,sender,
+              }
+                
                   
                  //send to users
             break;
@@ -129,7 +140,7 @@ private void handleConnection(Socket connection) throws IOException {
         writer.println(reply);
       System.out.println("SERVER: "+reply);
  }
- private void replyAllClient(String type, String username) throws IOException{
+ private void updateAllClients(String type, String username) throws IOException{
     String reply = type+"#"+username;
     OutputStream output;
      
@@ -142,11 +153,25 @@ private void handleConnection(Socket connection) throws IOException {
      }
      
  }
- private void messageToAll(String msg, String sender){
- 
+ private void messageToAll(String message, String sender) throws IOException{
+    String reply ="MSG#"+message+"#"+sender;
+    OutputStream output;
+     
+     for (Connection connection : users) {
+        output = connection.getSocket().getOutputStream();
+     // Print the same line we read to the client
+        PrintStream writer = new PrintStream(output);
+        writer.println(reply);
+      
+     }
  }
-  private void messageToClient(String msg,String sender, String reciever){
- 
+  private void messageToClient(String msg,String sender, Socket connection ) throws IOException{
+    OutputStream output;
+      String reply = "";
+      output = connection.getOutputStream();
+       PrintStream writer = new PrintStream(output);
+        writer.println(reply);
+      System.out.println("SERVER: "+reply);
  }
 
     public static void main(String[] args) throws IOException {
