@@ -1,3 +1,5 @@
+package server;
+
 
 import entity.Connection;
 import entity.Message;
@@ -24,13 +26,13 @@ import java.util.ArrayList;
  */
 public class Server {
 
-   private final String host;
+  
    private final int port;
    public static ArrayList<Message> messages;
    public static ArrayList<Connection> users;
 
-    public Server(String host, int port) {
-        this.host = host;
+    public Server(int port) {
+      
         this.port = port;
         users = new ArrayList();
         messages = new ArrayList();
@@ -40,7 +42,7 @@ public class Server {
         // Create a new unbound socket
         ServerSocket socket = new ServerSocket();
         // Bind to a port number
-        socket.bind(new InetSocketAddress(host, port));
+        socket.bind(new InetSocketAddress(port));
 
         System.out.println("Server listening on port " + port);
 
@@ -132,7 +134,7 @@ public class Server {
     }
 
     public static void main(String[] args) throws IOException {
-        Server server = new Server("localhost", 8081);
+        Server server = new Server(8081);
         server.startServer();
 
     }

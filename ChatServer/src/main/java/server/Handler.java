@@ -1,3 +1,5 @@
+package server;
+
 
 import entity.Connection;
 import entity.Message;
@@ -55,13 +57,5 @@ public Socket findRecieverSocket(ArrayList<Connection> userlist,String recieverN
        
     
     
-    public static void main(String[] args) {
-       Handler ha = new Handler(); 
-        System.out.println("type "+ ha.findType("MSG#Messi#Hej G"));
-        System.out.println( "messege "+ha.findMessege("MSG#Messi#Hej G"));
-        System.out.println( "messege "+ha.findMessege("MSG#Messi#Hej G"));
- System.out.println("type "+ ha.findType("LOGIN#Messi"));
-        
-        
-    }
+
 }

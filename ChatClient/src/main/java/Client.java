@@ -21,7 +21,7 @@ import java.util.function.Consumer;
  */
 public class Client {
 
-    private final String host = "localhost";
+    private final String host = "138.68.93.230";
     private final int port = 8081;
     private Socket clientSocket;
     public Boolean connected = false;

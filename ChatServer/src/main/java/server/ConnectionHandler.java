@@ -1,3 +1,5 @@
+package server;
+
 
 import entity.Connection;
 import entity.Message;
