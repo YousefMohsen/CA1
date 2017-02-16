@@ -26,8 +26,11 @@ import java.util.logging.Logger;
  */
 public class ConnectionHandler extends Thread {
         Socket connection;
+       String name;
         OutputStream output;
         InputStream input ;
+        
+        
   
         
 
@@ -47,72 +50,70 @@ public class ConnectionHandler extends Thread {
  
  
  
- private void handleConnection() throws IOException{
+ private void handleConnection() throws IOException {
        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
        String line;
          
-                 while((line = reader.readLine()) != null ){
-                     
-        
-        Handler inputHandler = new Handler();
-        String type;
-        String messege;
-        String reciever;
-        String sender;
-        Socket recieverSocket;
-        System.out.println("handleConnection");
-     
     
-        System.out.println("line from client(58) "+line);
-        type = inputHandler.findType(line);
-        reciever = inputHandler.findReciever(line);
-
-        System.out.println("l 71 type: " + type);
-
-        switch (type) {
-
-            case "LOGIN":
-
-                //login
-               if (Server.checkLogin(reciever)) {//succesful login // in this case "reciever" is the sender of the message
-                   Server.addUser(new Connection(reciever, connection));
-
-                    Server.replyClient("OK", connection);//Successful login followed by list of active user names
-
-                    //Update all clients when a single new user logs in
-                    Server.updateAllClients("UPDATE", reciever);
-               } else {
-                    Server.replyClient("FAIL", connection);//Failed login if user name is already taken or connection error
+                while((line = reader.readLine()) != null ){
+                    
+                    
+                    Handler inputHandler = new Handler();
+                    String type;
+                    String messege;
+                    String reciever;
+                    String sender;
+                    Socket recieverSocket;
+                    
+                    
+                    type = inputHandler.findType(line);
+                    reciever = inputHandler.findReciever(line);
+                    
+                    
+                    switch (type) {
+                        
+                        case "LOGIN":
+                            
+                            //login
+                            if (Server.checkLogin(reciever)) {//succesful login // in this case "reciever" is the sender of the message
+                                
+                              
+                                Server.addUser(new Connection(reciever, connection));
+                                
+                                Server.replyClient("OK", connection);//Successful login followed by list of active user names
+                                
+                                //Update all clients when a single new user logs in
+                                Server.updateAllClients("UPDATE", reciever);
+                            } else {
+                                Server.replyClient("FAIL", connection);//Failed login if user name is already taken or connection error
+                            }
+                            
+                            break;
+                            
+                        case "MSG":
+                            sender = inputHandler.findSender(Server.users, connection);
+                            messege = inputHandler.findMessege(line);
+                          
+                            
+                            
+                            if (reciever.equals("ALL")) {
+                            
+                                Server.messageToAll(messege, sender);
+                                
+                            } else {
+                                recieverSocket = inputHandler.findRecieverSocket(Server.users, reciever);
+                                
+                                Server.messageToClient(messege, sender, recieverSocket);
+                            }
+                            
+                            //send to users
+                            break;
+                            
+                    }
+                    
+                    
                 }
-
-                break;
-
-            case "MSG":
-                System.out.println("msg login");
-                sender = inputHandler.findSender(Server.users, connection);
-                messege = inputHandler.findMessege(line);
-                System.out.println("sender " + sender);
-                System.out.println("messege " + messege);
-
-               Server.addMessage(new Message(sender, messege));
-
-                if (reciever.equals("ALL")) {
-                    System.out.println("l 103 all");
-                    Server.messageToAll(messege, sender);
-
-                } else {
-                    recieverSocket = inputHandler.findRecieverSocket(Server.users, reciever);
-
-                   Server.messageToClient(messege, sender, recieverSocket);
-                }
-
-                //send to users
-                break;
-
-        }
-
-                     
-                 }       
+              
     
  
  
@@ -121,11 +122,14 @@ public class ConnectionHandler extends Thread {
 
     @Override
     public void run() {
+            //disconnect user
             try {
                 handleConnection();
+                  Server.removeUser(this.name);
+                  System.out.println("catch "+this.name);
             } catch (IOException ex) {
-                //disconnect user
-                Logger.getLogger(ConnectionHandler.class.getName()).log(Level.SEVERE, null, ex);
+                
+          
             }
      
     }

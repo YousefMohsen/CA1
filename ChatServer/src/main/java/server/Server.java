@@ -1,6 +1,5 @@
 package server;
 
-
 import entity.Connection;
 import entity.Message;
 import java.io.BufferedReader;
@@ -26,16 +25,13 @@ import java.util.ArrayList;
  */
 public class Server {
 
-  
-   private final int port;
-   public static ArrayList<Message> messages;
-   public static ArrayList<Connection> users;
+    private final int port;
+    public static ArrayList<Connection> users;
 
     public Server(int port) {
-      
+
         this.port = port;
         users = new ArrayList();
-        messages = new ArrayList();
     }
 
     public void startServer() throws IOException {
@@ -48,14 +44,17 @@ public class Server {
 
         // Wait for a connection
         Socket connection;
-        
+
         while ((connection = socket.accept()) != null) {//
-         new ConnectionHandler(connection).start();
+            new ConnectionHandler(connection).start();
 
         }
+    
+    
+    
     }
-     
- public static boolean checkLogin(String username) {
+
+    public static boolean checkLogin(String username) {
 
         for (Connection connections : users) {
             if (username.contains(connections.getUsername())) {
@@ -64,7 +63,8 @@ public class Server {
         }
         return true;
     }
- public static  void replyClient(String re, Socket connection) throws IOException {
+
+    public static void replyClient(String re, Socket connection) throws IOException {
         OutputStream output = connection.getOutputStream();
         // Print the same line we read to the client
         String reply = re;
@@ -87,7 +87,6 @@ public class Server {
         }
         PrintStream writer = new PrintStream(output);
         writer.println(reply);
-        System.out.println("SERVER: " + reply);
     }
 
     public static void updateAllClients(String type, String username) throws IOException {
@@ -119,18 +118,32 @@ public class Server {
 
     public static void messageToClient(String msg, String sender, Socket connection) throws IOException {
         OutputStream output;
-        String reply = "";
+        String reply = "MSG#" + sender + "#" + msg;
+
         output = connection.getOutputStream();
         PrintStream writer = new PrintStream(output);
         writer.println(reply);
-        System.out.println("SERVER: " + reply);
+
     }
-    
-    public static void addUser(Connection con){
-    users.add(con);
+
+    public static void addUser(Connection con) {
+        users.add(con);
     }
-   public static void addMessage(Message ms){
-    messages.add(ms);
+
+    public static void removeUser(String name) {
+        System.out.println("users length start: "+users.size());
+        for (Connection user : users) {
+            if(user.getUsername().equals(name)){
+              System.out.println("user removed: "+user.getUsername());
+                users.remove(user);
+              
+
+            }
+        }
+              
+            
+      
+System.out.println("users length end: "+users.size());
     }
 
     public static void main(String[] args) throws IOException {
