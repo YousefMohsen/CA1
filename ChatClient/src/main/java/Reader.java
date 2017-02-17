@@ -15,11 +15,11 @@ import java.util.logging.Logger;
  *
  * @author Janus
  */
-public class ReadCon implements Runnable {
+public class Reader implements Runnable {
 
     private InputStream input;
 
-    public ReadCon(InputStream in) {
+    public Reader(InputStream in) {
         input = in;
     }
 

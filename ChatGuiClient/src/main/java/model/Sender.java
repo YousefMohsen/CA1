@@ -1,3 +1,5 @@
+package model;
+
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -14,10 +16,10 @@ import java.util.function.Consumer;
  *
  * @author Janus
  */
-public class MsgCon implements Runnable{
+public class Sender implements Runnable{
     private OutputStream output;
     private String message;
-    public MsgCon(OutputStream out, String msg) {
+    public Sender(OutputStream out, String msg) {
         output = out;
         message = msg;
         
@@ -26,6 +28,7 @@ public class MsgCon implements Runnable{
     public void run() {
         PrintWriter writer = new PrintWriter(output);
                 writer.println(message);
+                System.out.println("Sender: " + message);
                 writer.flush();
     }
 }

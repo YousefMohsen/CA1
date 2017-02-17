@@ -65,13 +65,13 @@ public class Client {
         connected = true;
         System.out.println("Connecting to chatserver");
         //creating thread to listen from server
-        new Thread(new ReadCon(clientSocket.getInputStream())).start();
+        new Thread(new Reader(clientSocket.getInputStream())).start();
         sendMessage("LOGIN#" + username);
     }
 
     public void sendMessage(String message) throws IOException {
         // Creates new Thread and writes to the server
-        new Thread(new MsgCon(clientSocket.getOutputStream(), message)).start();
+        new Thread(new Sender(clientSocket.getOutputStream(), message)).start();
     }
 
 }

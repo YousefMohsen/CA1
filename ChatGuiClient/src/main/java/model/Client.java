@@ -8,6 +8,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
@@ -23,11 +25,12 @@ import java.util.function.Consumer;
 public class Client {
 //138.68.93.230
 
-    private final String host = "138.68.93.230";
+    private final String host = "localhost";
     private final int port = 8081;
     private Socket clientSocket;
     public Boolean connected;
     private String reciever;
+    public Reader reader;
 
     public Client() {
         reciever = "ALL";
@@ -53,6 +56,10 @@ public class Client {
     public void setReciever(String reciever) {
         this.reciever = reciever;
     }
+    
+    public void addObserver(Observer o){
+        reader.addObserver(o);
+    }
 
     public void login(String username) throws IOException {
         //connects to the server with username
@@ -61,13 +68,14 @@ public class Client {
         connected = true;
         System.out.println("Connecting to chatserver");
         //creating thread to listen from server
-        new Thread(new ReadCon(clientSocket.getInputStream())).start();
+        reader = new Reader(clientSocket.getInputStream());
+        new Thread(reader).start();
         sendMessage("LOGIN#" + username);
     }
 
     public void sendMessage(String message) throws IOException {
         // Creates new Thread and writes to the server
-        new Thread(new MsgCon(clientSocket.getOutputStream(), message)).start();
+        new Thread(new Sender(clientSocket.getOutputStream(), message)).start();
     }
 
 }

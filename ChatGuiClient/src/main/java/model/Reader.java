@@ -5,6 +5,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,13 +19,14 @@ import java.util.logging.Logger;
  *
  * @author Janus
  */
-public class ReadCon implements Runnable {
+public class Reader extends Observable implements Runnable{
 
     private InputStream input;
 
-    public ReadCon(InputStream in) {
+    public Reader(InputStream in) {
         input = in;
     }
+
 
     @Override
     public void run() {
@@ -56,7 +59,10 @@ public class ReadCon implements Runnable {
                 String message;
                 sender = s.split("#")[1];
                 message = s.split("#")[2];
+                String msg = sender + " " + message;
                 System.out.println(sender + " " + message);
+                System.out.println(countObservers());
+                notifyObservers(msg);
                 break;
             case "FAIL":
                 System.out.println("Connection failed or username already taken");
@@ -67,6 +73,7 @@ public class ReadCon implements Runnable {
                     besked += "\n" + s.split("#")[i];
                 }
                 System.out.println(besked);
+                System.out.println(countObservers());
                 break;
             case "DELETE":
                 System.out.println(s.split("#")[1]+" disconnected from the server");

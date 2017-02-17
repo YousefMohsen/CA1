@@ -1,12 +1,13 @@
 package view;
 
 import control.Control;
-import model.ReadCon;
-import model.MsgCon;
+import model.Reader;
+import model.Sender;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,7 +21,7 @@ import javax.swing.JOptionPane;
  *
  * @author Janus
  */
-public class ClientGui extends javax.swing.JFrame {
+public class ClientGui extends javax.swing.JFrame implements java.util.Observer{
 
     /**
      * Creates new form ClientGui
@@ -113,7 +114,7 @@ public class ClientGui extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addGap(16, 16, 16))
         );
@@ -132,6 +133,7 @@ public class ClientGui extends javax.swing.JFrame {
                 case "login": {
                     try {
                         cl.login(JOptionPane.showInputDialog("Write your username"));
+                        cl.addObserver(this);
                     } catch (IOException ex) {
                         System.out.println("Something went wrong maybe you typed the wrong IP adress?");
                     }
@@ -211,4 +213,10 @@ public class ClientGui extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        System.out.println("Testing update");
+        jTextArea1.append((String)arg);
+    }
 }

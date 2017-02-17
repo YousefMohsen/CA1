@@ -6,7 +6,9 @@
 package control;
 
 import java.io.IOException;
+import java.util.Observer;
 import model.Client;
+import model.Reader;
 
 /**
  *
@@ -32,6 +34,10 @@ public class Control {
     
     public void sendMessage(String s) throws IOException{
         cl.sendMessage(s);
+    }
+    
+    public void addObserver(Observer o){
+        cl.addObserver(o);
     }
 }
 

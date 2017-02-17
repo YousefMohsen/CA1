@@ -104,7 +104,7 @@ public class Server {
     }
 
     public static void messageToAll(String message, String sender) throws IOException {
-        String reply = "MSG#" + message + "#" + sender;
+        String reply = "MSG#" + sender + "#" + message;
         OutputStream output;
 
         for (Connection connection : users) {
