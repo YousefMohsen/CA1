@@ -120,7 +120,8 @@ public class Server {
     public static void messageToClient(String msg, String sender, Connection connection) throws IOException {
         OutputStream output;
         String reply = "MSG#" + sender + "#" + msg;
-
+        System.out.println("messageToClient: "+reply);
+        System.out.println("Connection: "+connection.getUsername()+" - "+connection.getSocket());
         output = connection.getSocket().getOutputStream();
         PrintStream writer = new PrintStream(output);
         writer.println(reply);

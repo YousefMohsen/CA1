@@ -91,19 +91,30 @@ public class ConnectionHandler extends Thread {
                             break;
                             
                         case "MSG":
+                         
                             sender = inputHandler.findSender(Server.users, connection);
                             messege = inputHandler.findMessege(line);
-                          
-                            
+                             System.out.println("sender: "+sender);
+                            System.out.println("message: "+messege);
+                            System.out.println("reciever: "+reciever);
                             
                             if (reciever.equals("ALL")) {
                             
                                 Server.messageToAll(messege, sender);
                                 
                             } else {
-                                recieverSocket = inputHandler.findRecieverSocket(Server.users, reciever);
                                 
-                                Server.messageToClient(messege, recieverSocket);
+                                
+                                for (Connection acon : Server.users) {
+                                    if(acon.getUsername().equals(reciever)){
+                                        
+                                    System.out.println("reciever found!"+acon.getUsername());
+                                   Server.messageToClient(messege,sender, acon);
+                                    }
+                                }
+                           //     recieverSocket = inputHandler.findRecieverSocket(Server.users, reciever);
+                                
+                               // 
                             }
                             
                             //send to users
@@ -130,7 +141,7 @@ public class ConnectionHandler extends Thread {
                 System.out.println("l 129");
             } catch (IOException ex) {
                 
-               
+                  Server.removeUser(this.con);
             }
      
     }
