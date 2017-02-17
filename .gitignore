@@ -49,3 +49,4 @@ ChatClient/nbdist/
 ChatClient/.nb-gradle/
 
 # End of https://www.gitignore.io/api/netbeans,maven
+/ChatWeb/target/

@@ -16,11 +16,11 @@ import java.util.function.Consumer;
  * and open the template in the editor.
  */
 /**
- *
+ *l
  * @author Janus
  */
 public class Client {
-
+//138.68.93.230
     private final String host = "localhost";
     private final int port = 8081;
     private Socket clientSocket;
