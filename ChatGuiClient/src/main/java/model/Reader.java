@@ -45,38 +45,39 @@ public class Reader extends Observable implements Runnable{
     }
 
     public void protocolDecoder(String s) {
+        System.out.println("Reader: "+s);
         switch (s.split("#")[0]) {
             case "OK":
 
-                String rest = "You are now connected to the server\nUsers Online:";
-                for (int i = 1; i < s.split("#").length; i++) {
-                    rest += "\n" + s.split("#")[i];
-                }
-                System.out.println(rest);
+                String rest = "You are now connected to the server";
+                setChanged();
+                notifyObservers(rest);
+                setChanged();
+                notifyObservers(s);
                 break;
             case "MSG":
                 String sender;
                 String message;
                 sender = s.split("#")[1];
                 message = s.split("#")[2];
-                String msg = sender + " " + message;
+                String msg = sender + ": " + message;
                 System.out.println(sender + " " + message);
-                System.out.println(countObservers());
+                setChanged();
                 notifyObservers(msg);
                 break;
             case "FAIL":
-                System.out.println("Connection failed or username already taken");
+                System.out.println("Username already taken");
                 break;
             case "UPDATE":
-                String besked = "Users Online:";
-                for (int i = 1; i < s.split("#").length; i++) {
-                    besked += "\n" + s.split("#")[i];
-                }
-                System.out.println(besked);
-                System.out.println(countObservers());
+                setChanged();
+                notifyObservers(s);
                 break;
             case "DELETE":
-                System.out.println(s.split("#")[1]+" disconnected from the server");
+                String usermessage = s.split("#")[1]+" disconnected from the server";
+                 setChanged();
+                notifyObservers(usermessage);
+                setChanged();
+                notifyObservers(s);
                 break;
         }
     }

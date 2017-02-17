@@ -22,6 +22,7 @@ public class Sender implements Runnable{
     public Sender(OutputStream out, String msg) {
         output = out;
         message = msg;
+        System.out.println("Sender startet");
         
     }
     @Override

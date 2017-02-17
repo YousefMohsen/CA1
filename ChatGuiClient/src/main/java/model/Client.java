@@ -25,7 +25,7 @@ import java.util.function.Consumer;
 public class Client {
 //138.68.93.230
 
-    private final String host = "localhost";
+    private final String host = "138.68.93.230";
     private final int port = 8081;
     private Socket clientSocket;
     public Boolean connected;
@@ -66,7 +66,6 @@ public class Client {
         clientSocket = new Socket();
         clientSocket.connect(new InetSocketAddress(host, port));
         connected = true;
-        System.out.println("Connecting to chatserver");
         //creating thread to listen from server
         reader = new Reader(clientSocket.getInputStream());
         new Thread(reader).start();

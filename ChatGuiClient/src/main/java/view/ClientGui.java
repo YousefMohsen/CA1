@@ -2,7 +2,6 @@ package view;
 
 import control.Control;
 import model.Reader;
-import model.Sender;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -10,6 +9,8 @@ import java.net.Socket;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 /*
@@ -21,7 +22,7 @@ import javax.swing.JOptionPane;
  *
  * @author Janus
  */
-public class ClientGui extends javax.swing.JFrame implements java.util.Observer{
+public class ClientGui extends javax.swing.JFrame implements java.util.Observer {
 
     /**
      * Creates new form ClientGui
@@ -144,15 +145,13 @@ public class ClientGui extends javax.swing.JFrame implements java.util.Observer{
                     cl.setReciever(JOptionPane.showInputDialog("Type who you want to write or ALL for everyone"));
                     break;
                 default:
-                    System.out.println(cl.getConnected());
-                    if (cl.getConnected()) {
+                    if (cl.getConnected() && input.length() > 0) {
                         try {
                             cl.sendMessage("MSG#" + cl.getReciever() + "#" + input);
                         } catch (IOException ex) {
                             System.out.println("Something went wrong with sending message");
                         }
                     } else {
-                        System.out.println(cl.getConnected());
                         System.out.println("Please login to the server by typing: login");
                     }
                     break;
@@ -166,7 +165,7 @@ public class ClientGui extends javax.swing.JFrame implements java.util.Observer{
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -193,7 +192,7 @@ public class ClientGui extends javax.swing.JFrame implements java.util.Observer{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 ClientGui cg = new ClientGui();
                 cg.setVisible(true);
                 cg.jTextField1.requestFocus();
@@ -213,10 +212,33 @@ public class ClientGui extends javax.swing.JFrame implements java.util.Observer{
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
-
+    
+    DefaultListModel listModel;
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("Testing update");
-        jTextArea1.append((String)arg);
+        String input = (String) arg;
+        switch (input.split("#")[0]) {
+            case "OK":
+                listModel = new DefaultListModel();
+                for (int i = 1; i < input.split("#").length; i++) {
+                    listModel.addElement(input.split("#")[i]);
+                }
+                jList1.setModel(listModel);
+                break;
+            
+            case "UPDATE":
+                listModel.removeElement(input.split("#")[1]);
+                listModel.addElement(input.split("#")[1]);
+                jList1.setModel(listModel);
+                break;
+            case "DELETE":
+                listModel.removeElement(input.split("#")[1]);
+                jList1.setModel(listModel);
+                break;
+
+            default:
+                jTextArea1.append("\n"+input);
+                break;
+        }
     }
 }
