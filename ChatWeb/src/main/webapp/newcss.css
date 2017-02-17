@@ -16,11 +16,6 @@ background-color: darkgray;
 
 }
 
-.buttonCol{
-    color: black;
-
-    
-}
 
 .newSection{
 padding-left: 10%;
@@ -36,6 +31,7 @@ padding-right: 10%;
     background-color: #333333; 
     
 }
+
 .aline{
     background-color:#333333;
     height: 20px;
@@ -47,4 +43,38 @@ padding-right: 10%;
 }
 .whiteTx{
     color: white;  
+}
+
+.imageE{
+    height: 50px;
+    width: 50px;
+    
+    
+}
+.downloadbox{
+    padding: 10px;
+    
+
+    width: 200px;
+    
+    
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color:beige;
+}
+li{
+     display: inline;
+    
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
 }

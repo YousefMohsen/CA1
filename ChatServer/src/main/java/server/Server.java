@@ -59,7 +59,7 @@ public class Server {
     public static boolean checkLogin(String username) {
 
         for (Connection connections : users) {
-            if (username.contains(connections.getUsername())) {
+            if (username.equals(connections.getUsername())) {
                 return false;
             }
         }
@@ -74,12 +74,10 @@ public class Server {
         switch (reply) {
 
             case "OK"://send
-                if (users.size() == 1) {
-                    reply += "#";
-                } else {
+            
                     for (Connection con : users) {
                         reply += "#" + con.getUsername();
-                    }
+                    
                 }
                 break;
             case "FAIL":
@@ -96,11 +94,12 @@ public class Server {
         OutputStream output;
 
         for (Connection connection : users) {
+            if(!connection.getUsername().equals(username)){
             output = connection.getSocket().getOutputStream();
             // Print the same line we read to the client
             PrintStream writer = new PrintStream(output);
             writer.println(reply);
-
+            }
         }
 
     }
