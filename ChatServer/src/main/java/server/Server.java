@@ -13,6 +13,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -130,21 +132,14 @@ public class Server {
         users.add(con);
     }
 
-    public static void removeUser(String name) {
-        System.out.println("users length start: "+users.size());
-        for (Connection user : users) {
-            if(user.getUsername().equals(name)){
-              System.out.println("user removed: "+user.getUsername());
-                users.remove(user);
-              
-
-            }
+    public static void removeUser(Connection con) {
+        users.remove(con);
+        try {
+            updateAllClients("DELETE",con.getUsername());
+        } catch (IOException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
-              
-            
-      
-System.out.println("users length end: "+users.size());
-    }
+}
 
     public static void main(String[] args) throws IOException {
         Server server = new Server(8081);

@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  */
 public class ConnectionHandler extends Thread {
         Socket connection;
-       String name;
+        Connection con;
         OutputStream output;
         InputStream input ;
         
@@ -77,8 +77,8 @@ public class ConnectionHandler extends Thread {
                             //login
                             if (Server.checkLogin(reciever)) {//succesful login // in this case "reciever" is the sender of the message
                                 
-                              
-                                Server.addUser(new Connection(reciever, connection));
+                              con = new Connection(reciever, connection);
+                                Server.addUser(con);
                                 
                                 Server.replyClient("OK", connection);//Successful login followed by list of active user names
                                 
@@ -113,8 +113,8 @@ public class ConnectionHandler extends Thread {
                     
                     
                 }
-              
-    
+             
+     Server.removeUser(this.con);
  
  
  }
@@ -123,13 +123,14 @@ public class ConnectionHandler extends Thread {
     @Override
     public void run() {
             //disconnect user
+          
             try {
                 handleConnection();
-                  Server.removeUser(this.name);
-                  System.out.println("catch "+this.name);
+            
+                System.out.println("l 129");
             } catch (IOException ex) {
                 
-          
+               
             }
      
     }
