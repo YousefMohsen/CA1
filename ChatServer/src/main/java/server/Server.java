@@ -117,11 +117,11 @@ public class Server {
         }
     }
 
-    public static void messageToClient(String msg, String sender, Socket connection) throws IOException {
+    public static void messageToClient(String msg, String sender, Connection connection) throws IOException {
         OutputStream output;
         String reply = "MSG#" + sender + "#" + msg;
 
-        output = connection.getOutputStream();
+        output = connection.getSocket().getOutputStream();
         PrintStream writer = new PrintStream(output);
         writer.println(reply);
 

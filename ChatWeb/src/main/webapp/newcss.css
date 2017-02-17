@@ -8,7 +8,8 @@ and open the template in the editor.
     Author     : Yousinho
 */
 
-.body{ padding-left: 10%; 
+.body{ 
+ padding-left: 10%; 
 padding-right: 10%;
 padding-top: 5%;
 
@@ -18,8 +19,11 @@ background-color: darkgray;
 
 
 .newSection{
+    padding-top: 10%;
 padding-left: 10%;
 padding-right: 10%;
+padding-bottom: 2%;
+   
     
     
 }
@@ -32,8 +36,14 @@ padding-right: 10%;
     
 }
 
-.aline{
+.bline{
     background-color:#333333;
+    height: 20px;
+    width: 100%;
+    
+}
+.wline{
+    background-color: white;
     height: 20px;
     width: 100%;
     
@@ -48,33 +58,20 @@ padding-right: 10%;
 .imageE{
     height: 50px;
     width: 50px;
-    
-    
-}
-.downloadbox{
-    padding: 10px;
-    
+      display: block;
+    margin: auto;
 
-    width: 200px;
     
-    
-}
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color:beige;
-}
-li{
-     display: inline;
     
 }
 
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+
+
+
+
+
+h1,h2,h3,h4,p,a{
+    
+      text-align: center;
+
 }

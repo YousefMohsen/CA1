@@ -63,7 +63,7 @@ public class ConnectionHandler extends Thread {
                     String messege;
                     String reciever;
                     String sender;
-                    Socket recieverSocket;
+                    Connection recieverSocket;
                     
                     
                     type = inputHandler.findType(line);
@@ -103,7 +103,7 @@ public class ConnectionHandler extends Thread {
                             } else {
                                 recieverSocket = inputHandler.findRecieverSocket(Server.users, reciever);
                                 
-                                Server.messageToClient(messege, sender, recieverSocket);
+                                Server.messageToClient(messege, recieverSocket);
                             }
                             
                             //send to users

@@ -42,13 +42,13 @@ public class Handler {
        }
        
            
-public Socket findRecieverSocket(ArrayList<Connection> userlist,String recieverName){
+public Connection findRecieverSocket(ArrayList<Connection> userlist,String recieverName){
   
     
            for (Connection connection : userlist) {
                
               if( connection.getUsername()==recieverName){
-              return connection.getSocket();
+              return connection;
               }
            
            }
