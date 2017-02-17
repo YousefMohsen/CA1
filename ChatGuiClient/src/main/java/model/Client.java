@@ -1,3 +1,4 @@
+package model;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,41 +22,36 @@ import java.util.function.Consumer;
  */
 public class Client {
 //138.68.93.230
-    private final String host = "localhost";
+
+    private final String host = "138.68.93.230";
     private final int port = 8081;
     private Socket clientSocket;
-    public Boolean connected = false;
+    public Boolean connected;
     private String reciever;
 
     public Client() {
         reciever = "ALL";
+        connected  = false;
     }
 
     public static void main(String[] args) throws IOException {
         Client cl = new Client();
-        Scanner sc = new Scanner(System.in);
-        String input;
-        while (sc.hasNext()) {
-            input = (String) sc.next();
+    }
 
-            switch (input) {
-                case "login":
-                    System.out.println("Skriv dit username:");
-                    cl.login((String) sc.next());
-                    break;
-                case "chat":
-                    System.out.println("Type name of the reciever or ALL for everyone");
-                    cl.reciever = (String) sc.next();
-                    break;
-                default:
-                    if (cl.connected) {
-                        cl.sendMessage("MSG#" + cl.reciever + "#" + input);
-                    } else {
-                        System.out.println("Please login to the server by typing: login");
-                    }
-                    break;
-            }
-        }
+    public Boolean getConnected() {
+        return connected;
+    }
+
+    public void setConnected(Boolean connected) {
+        this.connected = connected;
+    }
+
+    public String getReciever() {
+        return reciever;
+    }
+
+    public void setReciever(String reciever) {
+        this.reciever = reciever;
     }
 
     public void login(String username) throws IOException {
