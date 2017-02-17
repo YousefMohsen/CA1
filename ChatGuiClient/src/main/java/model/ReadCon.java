@@ -1,3 +1,5 @@
+package model;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -54,7 +56,7 @@ public class ReadCon implements Runnable {
                 String message;
                 sender = s.split("#")[1];
                 message = s.split("#")[2];
-                System.out.println(sender + ": " + message);
+                System.out.println(sender + " " + message);
                 break;
             case "FAIL":
                 System.out.println("Connection failed or username already taken");
