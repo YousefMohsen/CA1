@@ -20,8 +20,8 @@ public class Control {
     public boolean getConnected(){
     return cl.getConnected();
 }
-    public void login(String s) throws IOException{
-        cl.login(s);
+    public void login() throws IOException{
+        cl.login();
     }
     
     public String getReciever(){
@@ -39,5 +39,14 @@ public class Control {
     public void addObserver(Observer o){
         cl.addObserver(o);
     }
+
+    public String getName() {
+        return cl.getName();
+    }
+
+    public void setName(String name) {
+      cl.setName(name); 
+    }
+
 }
 

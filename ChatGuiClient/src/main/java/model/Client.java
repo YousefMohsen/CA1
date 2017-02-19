@@ -25,16 +25,19 @@ import java.util.function.Consumer;
 public class Client {
 //138.68.93.230
 
-    private final String host = "vetterlain.dk";
+    private final String host = "138.68.93.230";
     private final int port = 8081;
     private Socket clientSocket;
     public Boolean connected;
     private String reciever;
     public Reader reader;
+    public String name;
 
     public Client() {
+    
         reciever = "ALL";
         connected  = false;
+        name ="noName";
     }
 
     public static void main(String[] args) throws IOException {
@@ -61,7 +64,15 @@ public class Client {
         reader.addObserver(o);
     }
 
-    public void login(String username) throws IOException {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void login() throws IOException {
         //connects to the server with username
         clientSocket = new Socket();
         clientSocket.connect(new InetSocketAddress(host, port));
@@ -69,7 +80,7 @@ public class Client {
         //creating thread to listen from server
         reader = new Reader(clientSocket.getInputStream());
         new Thread(reader).start();
-        sendMessage("LOGIN#" + username);
+        sendMessage("LOGIN#" + name);
     }
 
     public void sendMessage(String message) throws IOException {
