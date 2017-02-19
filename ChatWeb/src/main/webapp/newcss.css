@@ -19,7 +19,7 @@ background-color: darkgray;
 
 
 .newSection{
-    padding-top: 10%;
+    padding-top: 1%;
 padding-left: 10%;
 padding-right: 10%;
 padding-bottom: 2%;
@@ -43,6 +43,8 @@ padding-bottom: 2%;
     
 }
 .wline{
+     
+
     background-color: white;
     height: 20px;
     width: 100%;
