@@ -13,8 +13,9 @@ and open the template in the editor.
 
     </head>
     <body>
-       
+           
         <div class="body">
+                  <div class="bline"></div>
             <div class="newSection back1 ">
                 <div class="bline"></div>
                 <h1> CA 1 Chatsystem </h1>
@@ -34,54 +35,66 @@ and open the template in the editor.
                <br>
             
       
-                  <h4>Download client</h4>   
-            <a href="downloads/Nutella.png"  download>
+                  <h4>Download client </h4>   
+            <a href="downloads/ChatClient.jar"  download>
                 
                 <img src="downloads/downIcon.png" alt="download" class="imageE" align="middle"/>
             </a>
-             
+                             <p>(På grund af manglende undervisning i maven og pom-filer, er det ikke lykedes os at lave en fungerende jar-fil. Klienten kan derfor kun tilgåes ved at downloade projektet og bygge det lokalt. )</p>
+
       
             
         </div>
             
-                       <div class="newSection back2 ">
+                      
+            
+            
+                <div class="newSection back2 ">
                       <div class="wline"></div>
-                     <h1 class="whiteTx"> Intro </h1>
+                     <h1 class="whiteTx"> Brugvejledning </h1>
         
                      <p class="whiteTx">
-                         
-                     </p>
+    For ar bruge dette chatsystem skal man bruge en chatklient, der er integrieret med dette protocol. Vi anbefaler dig at bruge vores chatklient, da det er den bedste tilgængelig løsning, men du kan også bruge andre klienter der virker med den tildligere nævnte protokol. I så fald skal du sørge for at klienten er forbundet med ip  138.68.93.230 og port 8081.
+
+ </p>
+    <p> 
+<img class src="downloads/chatScreenshot.png" alt=""/>
+<p class="whiteTx"> 
+Sådan ser start skærmen ud. Her kan du se listen over onlinebrugere, læse seneste beskeder, samt selv sende beskeder. 
+                  </p>
+                    
+                     <h3 class="leftText whiteTx"> Tilgængelig commands</h3>
+                    
+
+                     <p class="leftText whiteTx"> login : for at logge ind på chatten.      </p>
+              <p class="leftText whiteTx">chat : for at ændre tilstanden mellem privat- og fælleschat     </p>
                 </div>
             
-            
-                <div class="newSection back1 ">
-                      <div class="bline"></div>
-                     <h1 class="bhiteTx"> How to use the system </h1>
-        
-                     <p class="bhiteTx">
-                         To use this chatsystem you need a chatclient integrated with <a href="https://github.com/CphBusCosSem3/Exercises/blob/master/CA/CA1/protocol.md"> this</a> protocol. 
-                         You can either use our chatclient(download link above) or any other chatclient that uses the previously mentied protocol. We recommend you thou to use our chatclient, since it's the best soulution yet.
-    
-                     </p>
-                     <h3>Demo of the chatclient</h3>
-                </div>
-            
-                 <div class="newSection back2 ">
-                       <div class="wline"></div>
+                 <div class="newSection back1 ">
+                       <div class="bline"></div>
            
                 
-                       <h1 class="whiteTx"> System design </h1>
-                       <p class="whiteTx">
+                       <h1 class="blackTx"> System design </h1>
+                       <p class="blackTx">
                            Vores GuiClient er designet ud fra MVC pattern, hvor vi har model view control. Vores model pakke indeholder så en klasse som hedder client som står for at starte 2 tråde en for at skrive til serveren og en til at læse det der kommer fra serveren. Det er gjort så man kan bruge guien samtidig med at det sker. Vi fandt også ud af at det ville være smart at bruge observables så læse tråden kan notifie gui når den læser noget fra serveren, således at tråden nemt kan sende beskederne til gui, og at man nemt kan udskifte sit gui med et andet. Server delen er mere simpel og derfor har vi holdt den mere simpel, og har følgt protokollen og sørger for at vi håndterer connections ved at lave en tråd til hver connection så vi kan have flere end en connection af gangen.
+                        <img src="downloads/mvc.png" alt=""/>
                        </p>
-
+                     
         </div>
+            <div class="newSection back2 ">
+                  <div class="wline"></div>
+                     <h1 class="whiteTx"> Test mod en anden gruppe </h1>
+                     <p class="whiteTx">    
+    Fredag testede vi vores chatserver og client mod en af de andre gruppers server + client. Vi testede først vores server og fandt ud af at der var et problem med vores disconnect funktion. Da vi testede vores client mod en af de andres server (vetterlain.dk) fandt vi hurtigt ud af at vores client ikke kunne læse private beskeder, så vidste vi hvad vi skulle arbejde på, men ellers virkede vores protokol godt og vores server + client virkede fint.
+          </p>
+            
+            </div>
           
                <div class="newSection back1 ">
                        
                   <div class="bline"></div>
                 
-            <h1>  Who worked on what  </h1>
+            <h1> Arbejdsfordeling </h1>
             
             <h4 >ChatServer - Yousef Mohsen</h4>
             <h4 >CatWeb - Yousef Mohsen</h4>
@@ -90,6 +103,8 @@ and open the template in the editor.
                 
 
         </div>
+                
+       <div class="bline"></div>
             </div>
     
     </body>
