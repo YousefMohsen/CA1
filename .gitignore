@@ -48,6 +48,58 @@ ChatClient/dist/
 ChatClient/nbdist/
 ChatClient/.nb-gradle/
 
+
+#ChatGuiClient
+
+### Maven ###
+ChatGuiClient/target/
+ChatGuiClient/pom.xml.tag
+ChatGuiClient/pom.xml.releaseBackup
+ChatGuiClient/pom.xml.versionsBackup
+ChatGuiClient/pom.xml.next
+ChatGuiClient/release.properties
+ChatGuiClient/dependency-reduced-pom.xml
+ChatGuiClient/buildNumber.properties
+ChatGuiClient/.mvn/timing.properties
+
+# Exclude maven wrapper
+!ChatGuiClient/.mvn/wrapper/maven-wrapper.jar
+
+### NetBeans ###
+ChatGuiClient/nbproject/private/
+ChatGuiClient/build/
+ChatGuiClient/nbbuild/
+ChatGuiClient/dist/
+ChatGuiClient/nbdist/
+ChatGuiClient/.nb-gradle/
+
+
+#ChatWeb
+
+### Maven ###
+ChatWeb/target/
+ChatWeb/pom.xml.tag
+ChatWeb/pom.xml.releaseBackup
+ChatWeb/pom.xml.versionsBackup
+ChatWeb/pom.xml.next
+ChatWeb/release.properties
+ChatWeb/dependency-reduced-pom.xml
+ChatWeb/buildNumber.properties
+ChatWeb/.mvn/timing.properties
+
+# Exclude maven wrapper
+!ChatWeb/.mvn/wrapper/maven-wrapper.jar
+
+### NetBeans ###
+ChatWeb/nbproject/private/
+ChatWeb/build/
+ChatWeb/nbbuild/
+ChatWeb/dist/
+ChatWeb/nbdist/
+ChatWeb/.nb-gradle/
+
+
+
 # End of https://www.gitignore.io/api/netbeans,maven
 <<<<<<< HEAD
 /ChatWeb/target/
