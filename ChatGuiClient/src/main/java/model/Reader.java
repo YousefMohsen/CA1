@@ -45,10 +45,8 @@ public class Reader extends Observable implements Runnable{
     }
 
     public void protocolDecoder(String s) {
-        System.out.println("Reader: "+s);
         switch (s.split("#")[0]) {
             case "OK":
-
                 String rest = "You are now connected to the server";
                 setChanged();
                 notifyObservers(rest);
@@ -61,12 +59,12 @@ public class Reader extends Observable implements Runnable{
                 sender = s.split("#")[1];
                 message = s.split("#")[2];
                 String msg = sender + ": " + message;
-                System.out.println(sender + " " + message);
                 setChanged();
                 notifyObservers(msg);
                 break;
             case "FAIL":
-                System.out.println("Username already taken");
+                setChanged();
+                notifyObservers("Username already taken");
                 break;
             case "UPDATE":
                 setChanged();

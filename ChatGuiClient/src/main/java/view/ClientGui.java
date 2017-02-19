@@ -152,7 +152,7 @@ public class ClientGui extends javax.swing.JFrame implements java.util.Observer 
                             System.out.println("Something went wrong with sending message");
                         }
                     } else {
-                        System.out.println("Please login to the server by typing: login");
+                        jTextArea1.append("\nPlease login to the server by typing: login");
                     }
                     break;
             }

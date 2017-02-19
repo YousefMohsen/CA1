@@ -22,14 +22,12 @@ public class Sender implements Runnable{
     public Sender(OutputStream out, String msg) {
         output = out;
         message = msg;
-        System.out.println("Sender startet");
         
     }
     @Override
     public void run() {
         PrintWriter writer = new PrintWriter(output);
                 writer.println(message);
-                System.out.println("Sender: " + message);
                 writer.flush();
     }
 }
