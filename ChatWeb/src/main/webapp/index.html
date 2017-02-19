@@ -71,6 +71,9 @@ and open the template in the editor.
            
                 
                        <h1 class="whiteTx"> System design </h1>
+                       <p>
+                           Vores GuiClient er designet ud fra MVC pattern, hvor vi har model view control. Vores model pakke indeholder så en klasse som hedder client som står for at starte 2 tråde en for at skrive til serveren og en til at læse det der kommer fra serveren. Det er gjort så man kan bruge guien samtidig med at det sker. Vi fandt også ud af at det ville være smart at bruge observables så læse tråden kan notifie gui når den læser noget fra serveren, således at tråden nemt kan sende beskederne til gui, og at man nemt kan udskifte sit gui med et andet. Server delen er mere simpel og derfor har vi holdt den mere simpel, og har følgt protokollen og sørger for at vi håndterer connections ved at lave en tråd til hver connection så vi kan have flere end en connection af gangen.
+                       </p>
 
         </div>
           
